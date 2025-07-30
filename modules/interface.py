@@ -50,7 +50,8 @@ class Interface:
             scale = 0.8,
             on_change_start = lambda _: self.pause(),
             on_change_end = lambda _: self.release(),
-            on_change = lambda e: self.update_time_info(e)
+            on_change = lambda e: self.update_time_info(e),
+            interaction = SliderInteraction.SLIDE_ONLY
         )
         self.time_info = Text(
             value = '0:00 / 0:00',
@@ -83,7 +84,6 @@ class Interface:
                 self.slider,
                 self.time_info
             ],
-            expand = True,
             alignment = MainAxisAlignment.SPACE_BETWEEN
         )
         # GROUPS
@@ -99,7 +99,8 @@ class Interface:
                         alignment = MainAxisAlignment.SPACE_BETWEEN
                     ),
                     self.slider_row
-                ]
+                ],
+                alignment = MainAxisAlignment.SPACE_BETWEEN
             ),
             expand = True,
             padding = 12,
@@ -198,7 +199,9 @@ def main(page: Page, audio_directory: str):
     page.window.always_on_top = True
     page.theme_mode = ThemeMode.DARK
     page.window.width = 480
-    page.window.height = 120
+    page.window.height = 144
+    page.window.min_width = 480
+    page.window.min_height = 144
 
     interface = Interface(audio_directory, page)
 
